@@ -1,5 +1,6 @@
 import * as React from "react";
-import Test from "./Test";
+import Counter from "./Counter";
+import SecondCounter from "./SecondCounter";
 
 export default class App extends React.Component<{}, {}> {
     constructor(props: any) {
@@ -8,7 +9,11 @@ export default class App extends React.Component<{}, {}> {
 
     public render() {
         return (
-            <Test />
+            <div>
+                <Counter />
+                <br />
+                <SecondCounter />
+            </div>
         );
     }
 };

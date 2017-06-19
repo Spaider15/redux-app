@@ -1,18 +1,34 @@
 /**
  * Created by ia.busarov on 19.06.2017.
  */
-import { SET_TEST, ISetTest } from "../actions";
+import { SET_COUNTER, SET_SECOND_COUNTER, ISetCounter, ISetSecondCounter } from "../actions";
 import { IStore } from "../types";
+import { combineReducers } from "redux";
 
 const initialState: IStore = {
-    test: 5,
+    counter: 0,
+    secondCounter: 0,
 };
 
-export default function test(state = initialState, action: ISetTest) {
+function setCounter(state = 0, action: ISetCounter) {
     switch (action.type) {
-        case SET_TEST:
-            return { ...state, test: action.test };
+        case SET_COUNTER:
+            return action.counter;
         default:
             return state;
     }
-};
+}
+
+function setSecondCounter(state = 0, action: ISetSecondCounter) {
+    switch (action.type) {
+        case SET_SECOND_COUNTER:
+            return action.counter;
+        default:
+            return state;
+    }
+}
+
+export default combineReducers<IStore>({
+    counter: setCounter,
+    secondCounter: setSecondCounter,
+});

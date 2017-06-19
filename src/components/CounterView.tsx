@@ -1,9 +1,9 @@
 import * as React from "react";
-import { ISetTest } from "../actions";
+import { ISetCounter } from "../actions";
 
 interface IProps {
-    test: number;
-    setCounter: (value: number) => ISetTest;
+    counter: number;
+    setCounter: (value: number) => ISetCounter;
 }
 
 interface IState {
@@ -14,14 +14,14 @@ export default class App extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            counter: this.props.test,
+            counter: this.props.counter,
         };
     }
 
     public render() {
         return (
             <div>
-                <div>Счетчик: {this.props.test}</div>
+                <div>Счетчик: {this.props.counter}</div>
                 <input defaultValue={this.state.counter + ""}
                        onChange={ (e) => {this.setState({ counter: +e.currentTarget.value }); } }></input>
                 <button onClick={ () => { this.props.setCounter(this.state.counter); }}>Установить счетчик</button>
