@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { setCounter, setCounterAsync, ISetCounter } from "../actions";
+import { setCounter, ISetCounter, setCounterAsync, counterAction } from "../actions";
 import AppView from "../components/CounterView";
 import { IStore } from "../types";
 

@@ -2,6 +2,9 @@
  * Created by ia.busarov on 19.06.2017.
  */
 import { Dispatch } from "redux";
+import { createAction } from "redux-actions";
+import {ActionCreator} from "react-redux";
+import sleep from "sleep-es6";
 
 export const SET_COUNTER = "SET_COUNTER";
 export const COUNTER_LOADING = "COUNTER_LOADING";
@@ -13,51 +16,61 @@ export type secondCounterAction = ISetSecondCounter | ISecondCounterLoading;
 
 export interface ISetCounter {
     type: typeof SET_COUNTER;
-    counter: number;
+    payload: number;
 }
 
 export interface ISetSecondCounter {
     type: typeof SET_SECOND_COUNTER;
-    counter: number;
+    payload: number;
 }
 
 export interface ICounterLoading {
     type: typeof COUNTER_LOADING;
-    loading: boolean;
+    payload: boolean;
 }
 
 export interface ISecondCounterLoading {
     type: typeof SECOND_COUNTER_LOADING;
-    loading: boolean;
+    payload: boolean;
 }
 
-export const setCounterLoading = (value: boolean): ICounterLoading => {
-    return {
-        type: COUNTER_LOADING,
-        loading: value,
-    };
-};
+export const setCounterLoading = createAction<boolean>(COUNTER_LOADING);
+export const setSecondCounterLoading = createAction<boolean>(SECOND_COUNTER_LOADING);
+export const setCounter = createAction<number>(SET_COUNTER);
+export const setSecondCounter = createAction<number>(SET_SECOND_COUNTER);
 
-export const setSecondCounterLoading = (value: boolean): ISecondCounterLoading => {
-    return {
-        type: SECOND_COUNTER_LOADING,
-        loading: value,
-    };
-};
+// export const setCounterLoading = (value: boolean): ICounterLoading => {
+//     return {
+//         type: COUNTER_LOADING,
+//         loading: value,
+//     };
+// };
 
-export const setCounter = (value: number): ISetCounter => {
-    return {
-        type: SET_COUNTER,
-        counter: value,
-    };
-};
+// export const setSecondCounterLoading = (value: boolean): ISecondCounterLoading => {
+//     return {
+//         type: SECOND_COUNTER_LOADING,
+//         loading: value,
+//     };
+// };
 
-export const setSecondCounter = (value: number): ISetSecondCounter => {
-    return {
-        type: SET_SECOND_COUNTER,
-        counter: value,
-    };
-};
+// export const setCounter = (value: number): ISetCounter => {
+//     return {
+//         type: SET_COUNTER,
+//         counter: value,
+//     };
+// };
+
+// export const setSecondCounter = (value: number): ISetSecondCounter => {
+//     return {
+//         type: SET_SECOND_COUNTER,
+//         counter: value,
+//     };
+// };
+
+// export const setCounterAsync = createAction("SET_COUNTER_ASYNC", async (value: number) => {
+//     setCounterLoading(true);
+//
+// });
 
 export const setCounterAsync = (value: number) => {
     return (dispatch: Dispatch<counterAction>) => {

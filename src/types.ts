@@ -2,12 +2,16 @@
  * Created by ia.busarov on 19.06.2017.
  */
 export interface IStore {
-    counter: {
-        value: number;
-        loading: false;
-    };
-    secondCounter: {
-        value: number;
-        loading: false;
-    };
+    counter: ICounter;
+    secondCounter: ISecondCounter;
+}
+
+export interface ICounter {
+    value: number;
+    loading: false;
+}
+
+export interface ISecondCounter {
+    value: number;
+    loading: false;
 }
