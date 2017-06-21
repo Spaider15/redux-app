@@ -2,42 +2,40 @@
  * Created by ia.busarov on 19.06.2017.
  */
 import {
-    SET_COUNTER, SET_SECOND_COUNTER, COUNTER_LOADING, SECOND_COUNTER_LOADING,
-    ISetCounter } from "../actions";
-import { IStore, ICounter, ISecondCounter } from "../types";
+    SET_COUNTER, COUNTER_LOADING,
+    ISetCounter, ISetLoading,
+} from "../actions";
+import { IStore, ICounter } from "../types";
 import { combineReducers } from "redux";
 import {handleAction, combineActions, handleActions} from "redux-actions";
 
+const counters: ICounter[] = [];
+for (let i = 0; i <= 100; i++) {
+    counters.push({value : 0, loading: false});
+}
 const initialState: IStore = {
-    counter: {
-        value: 0,
-        loading: false,
-    },
-    secondCounter: {
-        value: 2,
-        loading: false,
-    },
+    counters,
 };
 
-const Counter = handleActions<ICounter>({
-    [SET_COUNTER]: (state: ICounter, action: ISetCounter) => {
-        return { ...state, value: action.payload };
+const Counter = handleActions<ICounter[]>({
+    [SET_COUNTER]: (state: ICounter[], action: ISetCounter) => {
+        const counters = state.slice();
+        const payload = action.payload;
+        if (payload) {
+            counters[payload.id].value = payload.value;
+        }
+        return counters;
     },
-    [COUNTER_LOADING]: (state: ICounter, action) => {
-        return { ...state, loading: action.payload };
+    [COUNTER_LOADING]: (state: ICounter[], action: ISetLoading) => {
+        const counters = state.slice();
+        const payload = action.payload;
+        if (payload) {
+            counters[payload.id].loading = payload.loading;
+        }
+        return counters;
     },
-}, initialState.counter);
-
-const SecondCounter = handleActions<ISecondCounter>({
-    [SET_SECOND_COUNTER]: (state: ISecondCounter, action) => {
-        return { ...state, value: action.payload };
-    },
-    [SECOND_COUNTER_LOADING]: (state: ISecondCounter, action) => {
-        return { ...state, loading: action.payload };
-    },
-}, initialState.secondCounter);
+}, initialState.counters);
 
 export default combineReducers<IStore>({
-    counter: Counter,
-    secondCounter: SecondCounter,
+    counters: Counter,
 });

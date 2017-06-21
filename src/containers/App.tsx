@@ -1,6 +1,5 @@
 import * as React from "react";
 import Counter from "./Counter";
-import SecondCounter from "./SecondCounter";
 
 export default class App extends React.Component<{}, {}> {
     constructor(props: any) {
@@ -8,12 +7,14 @@ export default class App extends React.Component<{}, {}> {
     }
 
     public render() {
+        const counters = [];
+        for (let i = 0; i <= 100; i++) {
+            counters.push(<Counter key={i} id ={i} />);
+        }
         return (
             <div>
-                <Counter />
-                <br />
-                <SecondCounter />
+                {counters}
             </div>
         );
     }
-};
+}

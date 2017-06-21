@@ -1,10 +1,12 @@
 import * as React from "react";
 import { ISetCounter } from "../actions";
+import { ICounter } from "../types";
 
 interface IProps {
     value: number;
     loading: boolean;
-    setCounter: (value: number) => ISetCounter;
+    id: number;
+    setCounter: (value: number, id: number) => ISetCounter;
 }
 
 interface IState {
@@ -20,10 +22,13 @@ export default class App extends React.Component<IProps, IState> {
     }
 
     public render() {
-        if ( this.props.loading ) {
-            return(
+        if (this.props.loading) {
+            return (
                 <div>
+                    <div>Счетчик: Loading...</div>
                     Loading...
+                    <br />
+                    <br />
                 </div>
             );
         } else {
@@ -31,8 +36,15 @@ export default class App extends React.Component<IProps, IState> {
                 <div>
                     <div>Счетчик: {this.props.value}</div>
                     <input defaultValue={this.state.value + ""}
-                           onChange={ (e) => {this.setState({ value: +e.currentTarget.value }); } }></input>
-                    <button onClick={ () => { this.props.setCounter(this.state.value); }}>Установить счетчик</button>
+                           onChange={ (e) => {
+                               this.setState({value: +e.currentTarget.value});
+                           } }></input>
+                    <button onClick={ () => {
+                        this.props.setCounter(this.state.value, this.props.id);
+                    }}>Установить счетчик
+                    </button>
+                    <br />
+                    <br />
                 </div>
             );
         }
