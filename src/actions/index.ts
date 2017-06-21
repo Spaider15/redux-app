@@ -39,39 +39,6 @@ export const setSecondCounterLoading = createAction<boolean>(SECOND_COUNTER_LOAD
 export const setCounter = createAction<number>(SET_COUNTER);
 export const setSecondCounter = createAction<number>(SET_SECOND_COUNTER);
 
-// export const setCounterLoading = (value: boolean): ICounterLoading => {
-//     return {
-//         type: COUNTER_LOADING,
-//         loading: value,
-//     };
-// };
-
-// export const setSecondCounterLoading = (value: boolean): ISecondCounterLoading => {
-//     return {
-//         type: SECOND_COUNTER_LOADING,
-//         loading: value,
-//     };
-// };
-
-// export const setCounter = (value: number): ISetCounter => {
-//     return {
-//         type: SET_COUNTER,
-//         counter: value,
-//     };
-// };
-
-// export const setSecondCounter = (value: number): ISetSecondCounter => {
-//     return {
-//         type: SET_SECOND_COUNTER,
-//         counter: value,
-//     };
-// };
-
-// export const setCounterAsync = createAction("SET_COUNTER_ASYNC", async (value: number) => {
-//     setCounterLoading(true);
-//
-// });
-
 export const setCounterAsync = (value: number) => {
     return (dispatch: Dispatch<counterAction>) => {
         dispatch(setCounterLoading(true));

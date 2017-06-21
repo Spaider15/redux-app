@@ -22,11 +22,9 @@ const initialState: IStore = {
 
 const Counter = handleActions<ICounter>({
     [SET_COUNTER]: (state: ICounter, action: ISetCounter) => {
-        console.log(`action: ${SET_COUNTER}`);
         return { ...state, value: action.payload };
     },
     [COUNTER_LOADING]: (state: ICounter, action: ISecondCounterLoading) => {
-        console.log(`action: ${COUNTER_LOADING}`);
         return { ...state, loading: action.payload };
     },
 }, initialState.counter);
