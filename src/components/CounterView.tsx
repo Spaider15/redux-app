@@ -1,10 +1,10 @@
 import * as React from "react";
-import { counterAction } from "../actions";
+import { ISetCounter } from "../actions";
 
 interface IProps {
     value: number;
     loading: boolean;
-    setCounter: (value: number) => Promise<any>;
+    setCounter: (value: number) => ISetCounter;
 }
 
 interface IState {

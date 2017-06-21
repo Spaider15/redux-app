@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { setCounter, ISetSecondCounter, setSecondCounter } from "../actions";
+import { setSecondCounterAsync, ISetCounter } from "../actions";
 import AppView from "../components/SecondCounterView";
 import { IStore } from "../types";
 
@@ -11,9 +11,9 @@ interface IProps {
 
 const mapStateToProps = ({ secondCounter }: IStore) => ({ ...secondCounter });
 
-const mapDispatchToProps = (dispatch: Dispatch<ISetSecondCounter> ) => {
+const mapDispatchToProps = (dispatch: Dispatch<ISetCounter> ) => {
     return {
-        setCounter: (value: number) => dispatch(setSecondCounter(value)),
+        setCounter: (value: number) => dispatch(setSecondCounterAsync(value)),
     };
 };
 

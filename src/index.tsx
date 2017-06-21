@@ -14,7 +14,7 @@ declare global {
     interface Window { __REDUX_DEVTOOLS_EXTENSION__: any; }
 }
 
-const store = createStore(Reducer, applyMiddleware(thunkMiddleware, promiseMiddleware, logger));
+const store = createStore(Reducer, applyMiddleware(thunkMiddleware, logger));
 
 render(
     <Provider store={store}>

@@ -3,8 +3,7 @@
  */
 import {
     SET_COUNTER, SET_SECOND_COUNTER, COUNTER_LOADING, SECOND_COUNTER_LOADING,
-    ISetCounter, ISecondCounterLoading, ISetSecondCounter
-} from "../actions";
+    ISetCounter } from "../actions";
 import { IStore, ICounter, ISecondCounter } from "../types";
 import { combineReducers } from "redux";
 import {handleAction, combineActions, handleActions} from "redux-actions";
@@ -24,16 +23,16 @@ const Counter = handleActions<ICounter>({
     [SET_COUNTER]: (state: ICounter, action: ISetCounter) => {
         return { ...state, value: action.payload };
     },
-    [COUNTER_LOADING]: (state: ICounter, action: ISecondCounterLoading) => {
+    [COUNTER_LOADING]: (state: ICounter, action) => {
         return { ...state, loading: action.payload };
     },
 }, initialState.counter);
 
 const SecondCounter = handleActions<ISecondCounter>({
-    [SET_SECOND_COUNTER]: (state: ISecondCounter, action: ISetSecondCounter) => {
+    [SET_SECOND_COUNTER]: (state: ISecondCounter, action) => {
         return { ...state, value: action.payload };
     },
-    [SECOND_COUNTER_LOADING]: (state: ISecondCounter, action: ISetSecondCounter) => {
+    [SECOND_COUNTER_LOADING]: (state: ISecondCounter, action) => {
         return { ...state, loading: action.payload };
     },
 }, initialState.secondCounter);
