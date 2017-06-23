@@ -7,7 +7,7 @@ import {
 } from "../actions";
 import { IStore, ICounter } from "../types";
 import { combineReducers } from "redux";
-import {handleAction, combineActions, handleActions} from "redux-actions";
+import { handleActions } from "redux-actions";
 
 const counters: ICounter[] = [];
 for (let i = 0; i <= 100; i++) {
@@ -17,7 +17,13 @@ const initialState: IStore = {
     counters,
 };
 
-const Counter = handleActions<ICounter[]>({
+interface IPayload {
+    id: number;
+    value?: number;
+    loading?: boolean;
+}
+
+export const Counter = handleActions<ICounter[], IPayload>({
     [SET_COUNTER]: (state: ICounter[], action: ISetCounter) => {
         const counters = state.slice();
         const payload = action.payload;
