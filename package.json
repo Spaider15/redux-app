@@ -33,6 +33,7 @@
     "jest": "jest --watch --verbose --coverage"
   },
   "jest": {
-    "testPathIgnorePatterns": ["/node_modules/", "/\\.idea/", "/\\.git/"]
+    "testPathIgnorePatterns": ["/node_modules/", "/\\.idea/", "/\\.git/"],
+    "automock": true
   }
 }
