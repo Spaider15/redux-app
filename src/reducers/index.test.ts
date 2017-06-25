@@ -35,6 +35,13 @@ it(`call reducer with ${SET_LOADING} action, expect new state with loading is tr
         .toEqual([{ value: 0, loading: true }]);
 });
 
+it("without payload should return initialState", () => {
+    expect(Counter(state, {type: SET_VALUE}))
+        .toEqual([{ value: 0, loading: false }]);
+    expect(Counter(state, {type: SET_LOADING}))
+        .toEqual([{ value: 0, loading: false }]);
+});
+
 it("Initial state should not be changed", () => {
     expect(state).toEqual([{value: 0, loading: false}]);
 });

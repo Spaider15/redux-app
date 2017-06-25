@@ -8,21 +8,13 @@ import {
 import { IStore, ICounter } from "../types";
 import { combineReducers } from "redux";
 import { handleActions } from "redux-actions";
-
-const initialCounters: ICounter[] = [];
-for (let i = 0; i <= 100; i++) {
-    initialCounters.push({value : 0, loading: false});
-}
-const initialState: IStore = {
-    counters: initialCounters,
-};
+import initialState from "../initalState";
 
 interface IPayload {
     id: number;
     value?: number;
     loading?: boolean;
 }
-
 export const Counter = handleActions<ICounter[], IPayload>({
     [SET_VALUE]: (state: ICounter[], action: ISetValue) => {
         const counters = state.slice();
