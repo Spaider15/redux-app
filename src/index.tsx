@@ -3,11 +3,9 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
-import * as promiseMiddleware from "redux-promise";
 import thunkMiddleware from "redux-thunk";
 import App from "./containers/App";
 import Reducer from "./reducers";
-import { IStore } from "./types";
 
 // tslint:disable no-namespace interface-name
 declare global {

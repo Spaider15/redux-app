@@ -2,19 +2,19 @@
  * Created by ia.busarov on 19.06.2017.
  */
 import {
-    SET_COUNTER, COUNTER_LOADING,
-    ISetCounter, ISetLoading,
+    SET_VALUE, SET_LOADING,
+    ISetValue, ISetLoading,
 } from "../actions";
 import { IStore, ICounter } from "../types";
 import { combineReducers } from "redux";
 import { handleActions } from "redux-actions";
 
-const counters: ICounter[] = [];
+const initialCounters: ICounter[] = [];
 for (let i = 0; i <= 100; i++) {
-    counters.push({value : 0, loading: false});
+    initialCounters.push({value : 0, loading: false});
 }
 const initialState: IStore = {
-    counters,
+    counters: initialCounters,
 };
 
 interface IPayload {
@@ -24,19 +24,19 @@ interface IPayload {
 }
 
 export const Counter = handleActions<ICounter[], IPayload>({
-    [SET_COUNTER]: (state: ICounter[], action: ISetCounter) => {
+    [SET_VALUE]: (state: ICounter[], action: ISetValue) => {
         const counters = state.slice();
         const payload = action.payload;
         if (payload) {
-            counters[payload.id].value = payload.value;
+            counters[payload.id] = { ...counters[payload.id], value: payload.value } ;
         }
         return counters;
     },
-    [COUNTER_LOADING]: (state: ICounter[], action: ISetLoading) => {
+    [SET_LOADING]: (state: ICounter[], action: ISetLoading) => {
         const counters = state.slice();
         const payload = action.payload;
         if (payload) {
-            counters[payload.id].loading = payload.loading;
+            counters[payload.id] = { ...counters[payload.id], loading: payload.loading } ;
         }
         return counters;
     },

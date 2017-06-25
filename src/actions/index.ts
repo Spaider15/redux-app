@@ -3,15 +3,13 @@
  */
 import { Dispatch } from "redux";
 import { createAction, Action } from "redux-actions";
-import { ActionCreator } from "react-redux";
-import sleep from "sleep-es6";
 
-export const SET_COUNTER = "SET_COUNTER";
-export const COUNTER_LOADING = "COUNTER_LOADING";
+export const SET_VALUE = "SET_VALUE";
+export const SET_LOADING = "SET_LOADING";
 
-export type counterAction = ISetCounter | ISetLoading;
+export type counterAction = ISetValue | ISetLoading;
 
-export interface ICounter {
+export interface IValue {
     value: number;
     id: number;
 }
@@ -20,18 +18,18 @@ export interface ILoading {
     id: number;
 }
 
-export type ISetCounter = Action<ICounter>;
+export type ISetValue = Action<IValue>;
 export type ISetLoading = Action<ILoading>;
 
-export const setCounter = createAction<ICounter>(SET_COUNTER);
-export const setCounterLoading = createAction<ILoading>(COUNTER_LOADING);
+export const setValue = createAction<IValue>(SET_VALUE);
+export const setLoading = createAction<ILoading>(SET_LOADING);
 
-export const setCounterAsync = (value: number, id: number) => {
+export const setValueAsync = (value: number, id: number) => {
     return (dispatch: Dispatch<counterAction>) => {
-        dispatch(setCounterLoading({ loading: true, id }));
+        dispatch(setLoading({ loading: true, id }));
         setTimeout(() => {
-            dispatch(setCounter({ value, id }));
-            dispatch(setCounterLoading({ loading: false, id }));
+            dispatch(setValue({ value, id }));
+            dispatch(setLoading({ loading: false, id }));
         }, 1000);
     };
 };

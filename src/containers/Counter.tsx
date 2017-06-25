@@ -1,19 +1,13 @@
-import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { setCounterAsync, ISetCounter } from "../actions";
+import { setValueAsync, ISetValue } from "../actions";
 import AppView from "../components/CounterView";
-import { IStore, ICounter } from "../types";
-
-interface IProps {
-    counters: ICounter[];
-    id: number;
-}
+import { IStore } from "../types";
 
 const mapStateToProps = ({ counters }: IStore, props: { id: number }) => ({ ...counters[props.id], id: props.id });
 
-const mapDispatchToProps = (dispatch: Dispatch<ISetCounter> ) => {
+const mapDispatchToProps = (dispatch: Dispatch<ISetValue> ) => {
     return {
-        setCounter: (value: number, id: number) => dispatch(setCounterAsync(value, id)),
+        setCounter: (value: number, id: number) => dispatch(setValueAsync(value, id)),
     };
 };
 

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { ISetCounter } from "../actions";
-import { ICounter } from "../types";
 
 interface IProps {
     value: number;

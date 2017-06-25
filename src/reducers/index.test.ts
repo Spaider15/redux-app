@@ -1,7 +1,7 @@
 /**
  * Created by ia.busarov on 23.06.2017.
  */
-import { setCounter, setCounterLoading, setCounterAsync } from "../actions";
+import { createAction } from "redux-actions";
 import { Counter } from "./index";
 import { ICounter } from "../types";
 
@@ -11,29 +11,30 @@ const state: ICounter[] = [
         loading: false,
     },
 ];
-const dispatch = jest.fn();
+const SET_VALUE = "SET_VALUE";
+const SET_LOADING = "SET_LOADING";
+export interface ISetValue {
+    value: number;
+    id: number;
+}
+export interface ISetLoading {
+    loading: boolean;
+    id: number;
+}
 
-jest.useFakeTimers();
+const setValue = createAction<ISetValue>(SET_VALUE);
+const setLoading = createAction<ISetLoading>(SET_LOADING);
 
-it("dispatch setCounter action, expect value to be 5", () => {
-    expect(Counter(state, setCounter({value: 5, id: 0})))
+it(`call reducer with ${SET_VALUE} action, expect new state with value 5`, () => {
+    expect(Counter(state, setValue({value: 5, id: 0})))
         .toEqual([{ value: 5, loading: false }]);
 });
 
-it("dispatch setLoading action, expect loading to be true" , () => {
-    expect(Counter(state, setCounterLoading({loading: true, id: 0})))
-        .toEqual([{ value: 5, loading: true }]);
+it(`call reducer with ${SET_LOADING} action, expect new state with loading is true` , () => {
+    expect(Counter(state, setLoading({loading: true, id: 0})))
+        .toEqual([{ value: 0, loading: true }]);
 });
 
-it("dispatch setCounterAsync action, expect call dispatch 3 times, and value to be 10", () => {
-    const value = 10;
-    const id = 0;
-    const action = setCounterAsync(value, id);
-    action(dispatch);
-    expect( dispatch.mock.calls.length ).toBe( 1 );
-    expect( dispatch.mock.calls[0][0] ).toEqual( setCounterLoading({loading: true, id}) );
-    jest.runTimersToTime(1000);
-    expect( dispatch.mock.calls.length ).toBe( 3 );
-    expect( dispatch.mock.calls[1][0] ).toEqual( setCounter({value, id}) );
-    expect( dispatch.mock.calls[2][0] ).toEqual( setCounterLoading({loading: false, id}) );
+it("Initial state should not be changed", () => {
+    expect(state).toEqual([{value: 0, loading: false}]);
 });
